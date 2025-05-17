@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Amas Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            animation: gradient 15s ease infinite;
+            background: linear-gradient(-45deg, #1f2937, #111827, #1e3a8a, #4b0082);
+            background-size: 400% 400%;
+        }
+        h1, h2, h3 {
+            font-family: 'Poppins', sans-serif;
+        }
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .ripple {
+            position: relative;
+            overflow: hidden;
+        }
+        .ripple::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            animation: rippleEffect 0.6s linear;
+            pointer-events: none;
+        }
+        @keyframes rippleEffect {
+            to { width: 200px; height: 200px; opacity: 0; }
+        }
+        /* Hamburger Menu */
+        #menuToggle:checked ~ ul {
+            display: flex;
+        }
+        /* Tap effect for mobile */
+        .tap-effect {
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .tap-effect:active {
+            transform: scale(0.95);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="text-white min-h-screen">
+    <!-- Header -->
+    <header class="flex justify-between items-center p-6 bg-gray-900/90 backdrop-blur-md sticky top-0 z-10 shadow-xl border-b border-blue-500/20 fade-in">
+        <div class="logo">
+            <img src="https://via.placeholder.com/150x50?text=Logo" alt="Logo" class="h-12 sm:h-14 transition-transform hover:scale-105">
+        </div>
+        <nav class="flex items-center">
+            <input type="checkbox" id="menuToggle" class="hidden">
+            <label for="menuToggle" class="sm:hidden cursor-pointer">
+                <i class="fas fa-bars text-2xl"></i>
+            </label>
+            <ul class="hidden sm:flex flex-col sm:flex-row absolute sm:static top-16 left-0 w-full sm:w-auto bg-gray-900/95 sm:bg-transparent p-4 sm:p-0 space-y-4 sm:space-y-0 sm:space-x-6 text-lg">
+                <li><a href="#" class="hover:text-blue-400 transition-colors duration-300 tap-effect">Home</a></li>
+                <li><a href="#" class="hover:text-blue-400 transition-colors duration-300 tap-effect">Features</a></li>
+                <li><a href="#" class="hover:text-blue-400 transition-colors duration-300 tap-effect">Support</a></li>
+                <li><a href="#" class="hover:text-blue-400 transition-colors duration-300 tap-effect">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Image Slider -->
+    <section class="py-8 sm:py-12 relative fade-in" style="animation-delay: 0.2s;">
+        <div class="max-w-5xl mx-auto overflow-hidden rounded-2xl shadow-2xl border border-blue-500/30">
+            <div id="slider" class="flex transition-opacity duration-700 relative h-[300px] sm:h-[500px]">
+                <img src="https://via.placeholder.com/1200x500?text=Image+1" alt="Slide 1" class="w-full h-full object-cover absolute">
+                <img src="https://via.placeholder.com/1200x500?text=Image+2" alt="Slide 2" class="w-full h-full object-cover absolute">
+                <img src="https://via.placeholder.com/1200x500?text=Image+3" alt="Slide 3" class="w-full h-full object-cover absolute">
+                <img src="https://via.placeholder.com/1200x500?text=Image+4" alt="Slide 4" class="w-full h-full object-cover absolute">
+                <img src="https://via.placeholder.com/1200x500?text=Image+5" alt="Slide 5" class="w-full h-full object-cover absolute">
+            </div>
+            <!-- Navigation Buttons -->
+            <button id="prevSlide" class="absolute top-1/2 left-2 sm:left-4 transform -translate-y-1/2 bg-gray-900/70 p-2 sm:p-3 rounded-full hover:bg-gray-900/90 transition-colors tap-effect">
+                <i class="fas fa-chevron-left text-xl sm:text-2xl"></i>
+            </button>
+            <button id="nextSlide" class="absolute top-1/2 right-2 sm:right-4 transform -translate-y-1/2 bg-gray-900/70 p-2 sm:p-3 rounded-full hover:bg-gray-900/90 transition-colors tap-effect">
+                <i class="fas fa-chevron-right text-xl sm:text-2xl"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- Script Section -->
+    <section class="py-8 sm:py-12 max-w-5xl mx-auto fade-in" style="animation-delay: 0.4s;">
+        <div class="bg-gray-900/70 p-6 rounded-2xl shadow-2xl border border-blue-500/30 backdrop-blur-sm">
+            <p id="scriptText" class="font-mono text-sm sm:text-base bg-gray-800/80 p-4 rounded-lg text-gray-200 break-all">loadstring(game:HttpGet("https://raw.githubusercontent.com/AmasReal/Amas-Hub/refs/heads/main/Loader.Lua"))()</p>
+            <button id="copyButton" class="mt-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg text-base sm:text-lg transition-all duration-300 transform hover:scale-105 ripple tap-effect">Copy Script</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-8 sm:py-12 fade-in" style="animation-delay: 0.6s;">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Features</h2>
+        <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-2xl shadow-xl border border-blue-500/20 hover:scale-105 transition-transform duration-300 tap-effect">
+                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-rocket text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-semibold">Optimization</h3>
+                <p class="text-gray-300 text-sm sm:text-base">Maximized performance for seamless experience.</p>
+            </div>
+            <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-2xl shadow-xl border border-blue-500/20 hover:scale-105 transition-transform duration-300 tap-effect">
+                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-mobile-alt text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-semibold">PC & Mobile Support</h3>
+                <p class="text-gray-300 text-sm sm:text-base">Flawless on any device.</p>
+            </div>
+            <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-2xl shadow-xl border border-blue-500/20 hover:scale-105 transition-transform duration-300 tap-effect">
+                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-bolt text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-semibold">Fast Updates</h3>
+                <p class="text-gray-300 text-sm sm:text-base">Always up-to-date with new features.</p>
+            </div>
+            <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-6 rounded-2xl shadow-xl border border-blue-500/20 hover:scale-105 transition-transform duration-300 tap-effect">
+                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mb-4">
+                    <i class="fas fa-star text-2xl text-white"></i>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-semibold">Best Free Hub</h3>
+                <p class="text-gray-300 text-sm sm:text-base">Premium features, completely free.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Supported Games Section -->
+    <section class="py-8 sm:py-12 fade-in" style="animation-delay: 0.8s;">
+        <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 sm:mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Supported Games</h2>
+        <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div class="relative bg-gray-900/80 p-4 rounded-2xl shadow-xl border border-blue-500/20 group backdrop-blur-sm tap-effect">
+                <img src="https://via.placeholder.com/300x150?text=Blox+Fruits" alt="Blox Fruits" class="w-full h-40 sm:h-48 object-cover rounded-lg transition-transform duration-300 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                <h3 class="text-lg sm:text-xl font-semibold mt-4 relative z-10">Blox Fruits</h3>
+            </div>
+            <div class="relative bg-gray-900/80 p-4 rounded-2xl shadow-xl border border-blue-500/20 group backdrop-blur-sm tap-effect">
+                <img src="https://via.placeholder.com/300x150?text=Grow+A+Garden" alt="Grow A Garden" class="w-full h-40 sm:h-48 object-cover rounded-lg transition-transform duration-300 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                <h3 class="text-lg sm:text-xl font-semibold mt-4 relative z-10">Grow A Garden</h3>
+            </div>
+            <div class="relative bg-gray-900/80 p-4 rounded-2xl shadow-xl border border-blue-500/20 group backdrop-blur-sm tap-effect">
+                <img src="https://via.placeholder.com/300x150?text=Fisch" alt="Fisch" class="w-full h-40 sm:h-48 object-cover rounded-lg transition-transform duration-300 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                <h3 class="text-lg sm:text-xl font-semibold mt-4 relative z-10">Fisch</h3>
+            </div>
+            <div class="relative bg-gray-900/80 p-4 rounded-2xl shadow-xl border border-blue-500/20 group backdrop-blur-sm tap-effect">
+                <img src="https://via.placeholder.com/300x150?text=Dead+Rails" alt="Dead Rails" class="w-full h-40 sm:h-48 object-cover rounded-lg transition-transform duration-300 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                <h3 class="text-lg sm:text-xl font-semibold mt-4 relative z-10">Dead Rails</h3>
+            </div>
+            <div class="relative bg-gray-900/80 p-4 rounded-2xl shadow-xl border border-blue-500/20 group backdrop-blur-sm tap-effect">
+                <img src="https://via.placeholder.com/300x150?text=Arise+Crossover" alt="Arise Crossover" class="w-full h-40 sm:h-48 object-cover rounded-lg transition-transform duration-300 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                <h3 class="text-lg sm:text-xl font-semibold mt-4 relative z-10">Arise Crossover</h3>
+            </div>
+            <div class="relative bg-gray-900/80 p-4 rounded-2xl shadow-xl border border-blue-500/20 group backdrop-blur-sm tap-effect">
+                <img src="https://via.placeholder.com/300x150?text=Dungeon+Heroes" alt="Dungeon Heroes" class="w-full h-40 sm:h-48 object-cover rounded-lg transition-transform duration-300 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                <h3 class="text-lg sm:text-xl font-semibold mt-4 relative z-10">Dungeon Heroes</h3>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Image Slider
+        const slider = document.getElementById('slider');
+        const slides = slider.children;
+        const totalSlides = slides.length;
+        let currentIndex = 0;
+
+        function showSlide(index) {
+            for (let i = 0; i < totalSlides; i++) {
+                slides[i].style.opacity = i === index ? '1' : '0';
+                slides[i].style.transition = 'opacity 0.7s ease';
+            }
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            showSlide(currentIndex);
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            showSlide(currentIndex);
+        }
+
+        document.getElementById('nextSlide').addEventListener('click', nextSlide);
+        document.getElementById('prevSlide').addEventListener('click', prevSlide);
+
+        // Auto slide
+        let autoSlide = setInterval(nextSlide, 4000);
+
+        // Pause on hover
+        slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
+        slider.addEventListener('mouseleave', () => autoSlide = setInterval(nextSlide, 4000));
+        slider.addEventListener('touchstart', () => clearInterval(autoSlide));
+        slider.addEventListener('touchend', () => autoSlide = setInterval(nextSlide, 4000));
+
+        // Initial setup
+        showSlide(currentIndex);
+
+        // Copy Script Button
+        const copyButton = document.getElementById('copyButton');
+        const scriptText = document.getElementById('scriptText').textContent;
+
+        copyButton.addEventListener('click', (e) => {
+            navigator.clipboard.writeText(scriptText).then(() => {
+                copyButton.textContent = 'Copied!';
+                copyButton.classList.add('from-green-600', 'to-green-700');
+                copyButton.classList.remove('from-blue-600', 'to-purple-600');
+                copyButton.classList.add('ripple');
+                setTimeout(() => {
+                    copyButton.textContent = 'Copy Script';
+                    copyButton.classList.remove('from-green-600', 'to-green-700');
+                    copyButton.classList.add('from-blue-600', 'to-purple-600');
+                    copyButton.classList.remove('ripple');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+    </script>
+</body>
+</html>
